@@ -5,12 +5,64 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 function App() {
+  return (
+      <Router>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/topics" component={Topics} />
+        </div>
+      </Router>
+  )
+}
+
+function Topics() {
+  return (
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else. Maybe with Zuckerberg. But not with Gates.
+            We'll never share your email with Bill Gates.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" />
+        </Form.Group>
+        <Form.Group controlId="formBasicChecbox">
+          <Form.Check type="checkbox" label="Check me out" />
+        </Form.Group>
+      </Form>
+  )
+}
+
+function About() {
+  return (
+      <ButtonToolbar>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="success">Success</Button>
+        <Button variant="warning">Warning</Button>
+        <Button variant="danger">Danger</Button>
+        <Button variant="info">Info</Button>
+        <Button variant="light">Light</Button>
+        <Button variant="dark">Dark</Button>
+        <Button variant="link">Link</Button>
+      </ButtonToolbar>
+  )
+}
+
+function Home() {
   return (
     <div className="App">
       <header className="App-header">
@@ -26,29 +78,10 @@ function App() {
             <Col> 3 of 3 LOL! </Col>
           </Row>
         </Container>
-
       </header>
         <p>
           Edit <code>src/App.js</code> and save to reload. However, javascript is a nightmare.
         </p>
-        <Form>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else. Maybe with Zuckerberg. But not with Gates.
-              We'll never share your email with Bill Gates.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group controlId="formBasicChecbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-      </Form>
         <Button variant="primary">Primary</Button>
         <a
           className="App-link"
@@ -58,17 +91,6 @@ function App() {
         >
           Learn React
         </a>
-        <ButtonToolbar>
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="success">Success</Button>
-          <Button variant="warning">Warning</Button>
-          <Button variant="danger">Danger</Button>
-          <Button variant="info">Info</Button>
-          <Button variant="light">Light</Button>
-          <Button variant="dark">Dark</Button>
-          <Button variant="link">Link</Button>
-        </ButtonToolbar>
     </div>
   );
 }
