@@ -20,9 +20,11 @@ function App() {
             <Col> 1 of 2 </Col>
             <Col> 2 of 2 </Col>
           </Row>
-          <Col> 1 of 2 </Col>
-          <Col xs={6}> 2 of 2 (wider)</Col>
-          <Col> 3 of 3 LOL! </Col>
+          <Row>
+            <Col> 1 of 2 </Col>
+            <Col xs={6}> 2 of 2 (wider)</Col>
+            <Col> 3 of 3 LOL! </Col>
+          </Row>
         </Container>
 
       </header>
