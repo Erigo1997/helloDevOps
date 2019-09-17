@@ -6,11 +6,25 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <Container>
+          <Row>
+            <Col> 1 of 2 </Col>
+            <Col> 2 of 2 </Col>
+          </Row>
+          <Col> 1 of 2 </Col>
+          <Col xs={6}> 2 of 2 (wider)</Col>
+          <Col> 3 of 3 LOL! </Col>
+        </Container>
+
       </header>
         <p>
           Edit <code>src/App.js</code> and save to reload. However, javascript is a nightmare.
