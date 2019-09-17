@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
       </Form>
+        <Button variant="primary">Primary</Button>
         <a
           className="App-link"
           href="https://reactjs.org"
