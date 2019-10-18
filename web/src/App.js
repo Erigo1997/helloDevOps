@@ -2,97 +2,61 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Form from 'react-bootstrap/Form';
-import Button from "react-bootstrap/Button";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import {Route, Link, Switch, withRouter} from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import GiraffeStore from "./stores/GiraffeStore";
+import {observer} from "mobx-react";
+
+const  giraffeStore = new GiraffeStore();
 
 function App() {
-  return (
-      <Router>
-        <div>
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
+    return (
+            <div>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/about/">About</Link>
+                        </li>
+                        <li>
+                            <Link to="/users/">Users</Link>
+                        </li>
+                    </ul>
+                </nav>
+
+                <Switch>
+                    <Route path={"/about/:text"} component={About}/>
+                    <Route path={"/users/"} component={Users}/>
+                    <Route exact path={"/"} render={()=><h1>Startside</h1>}/>
+                    <Route render={()=><h1>404</h1>}/>
+                </Switch>
+            </div>
+    );
+}
+
+const Users = observer(()=> {
+    return <div>
+        <h2> {giraffeStore.state} </h2>
+        <ul>
+            {giraffeStore.giraffes.map((giraffeName,key)=>
+                <li key={key}>{giraffeName}</li>
+            )}
+        </ul>
+
+        <Button variant="warning" onClick={()=>giraffeStore.pushGiraffe("Elliot")}>Tilføj giraf</Button>
         </div>
-      </Router>
-  )
-}
+})
 
-function Topics() {
-  return (
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else. Maybe with Zuckerberg. But not with Gates.
-            We'll never share your email with Bill Gates.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group controlId="formBasicChecbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-      </Form>
-  )
-}
-
-function About() {
-  return (
-      <ButtonToolbar>
-        <Button variant="primary">Primary</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="success">Success</Button>
-        <Button variant="warning">Warning</Button>
-        <Button variant="danger">Danger</Button>
-        <Button variant="info">Info</Button>
-        <Button variant="light">Light</Button>
-        <Button variant="dark">Dark</Button>
-        <Button variant="link">Link</Button>
-      </ButtonToolbar>
-  )
-}
-
-function Home() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Container>
-          <Row>
-            <Col> 1 of 2 </Col>
-            <Col> 2 of 2 </Col>
-          </Row>
-          <Row>
-            <Col> 1 of 2 </Col>
-            <Col xs={6}> 2 of 2 (wider)</Col>
-            <Col> 3 of 3 LOL! </Col>
-          </Row>
-        </Container>
-      </header>
-        <p>
-          Edit <code>src/App.js</code> and save to reload. However, javascript is a nightmare.
-        </p>
-        <Button variant="primary">Primary</Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+const About = withRouter(({history, match})=> {
+    console.log(history);
+    console.log(match);
+    return <div>
+        <h1> About {match.params.text}</h1>
+        <Button variant="primary" onClick={()=>history.push("/")}>Push History</Button>
     </div>
-  );
-}
+});
 
-export default App;
+export default observer(App);
